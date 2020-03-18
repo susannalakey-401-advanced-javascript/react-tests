@@ -1,4 +1,7 @@
 import React from 'react';
+import './counter.scss'
+import palm from './palm.png'
+import statue from './statue.png'
 
 class Counter extends React.Component {
   constructor(props) {
@@ -7,33 +10,33 @@ class Counter extends React.Component {
   }
 
   handleUp = e => {
-    let count = this.state.count + 1;
-    this.updateCounter(count);
+    this.updateCounter(1);
   };
 
   handleDown = e => {
-    let count = this.state.count - 1;
-    this.updateCounter(count);
+    this.updateCounter(-1);
   };
 
-  updateCounter(count) {
-    let polarity = '';
-    if (count > 0) {
-      polarity = 'positive';
-    } else if (count < 0) {
-      polarity = 'negative';
-    }
-    this.setState({ count, polarity });
+  updateCounter(countDiff) {
+    this.setState((oldState) => ({
+      count: oldState.count + countDiff,
+    }))
   }
 
   render() {
-    let classes = ['count', this.state.polarity].join(' ');
+    const countClass = this.state.count % 2 === 0 ? "show" : "hide";
     return (
-      <section className="counter">
-        <span className="down clicker" onClick={this.handleDown}> - </span>
-        <span className={classes}>{this.state.count}</span>
-        <span className="up clicker" onClick={this.handleUp}> + </span>
-      </section>
+      <>
+
+        <section className="counter">
+          <img src={palm} className={countClass} />
+          <span className="down clicker" onClick={this.handleDown}> - </span>
+          <span className="count">{this.state.count}</span>
+          <span className="up clicker" onClick={this.handleUp}> + </span>
+          <img src={statue} className={countClass} />
+        </section>
+
+      </>
     );
   }
 }

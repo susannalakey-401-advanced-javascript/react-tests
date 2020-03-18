@@ -4,12 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
+aws.yml
 
 # testing
 /coverage
 
-# production
-/build
+# Build folder
+build/
 
 # misc
 .DS_Store
